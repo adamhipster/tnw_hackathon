@@ -1,4 +1,3 @@
-
 const hostname = '127.0.0.1';
 const port = 3000;
 const express = require('express');
@@ -9,12 +8,12 @@ var app = express();
 
 app.use(bodyParser());
 
-app.get('/agreement', function(req, res) {
+app.get('/agreement', function (req, res) {
   getAgreement();
 });
 
-function getAgreement(){
-  var getAgreementId = function(next) {
+function getAgreement() {
+  var getAgreementId = function (next) {
     var options = {
       url: 'https://api.toonapi.com/toon/api/v1/agreements',
       headers: {
@@ -24,7 +23,7 @@ function getAgreement(){
 
     request(options, function (error, response, body) {
 
-      if(error) {
+      if (error) {
         console.log('Getting Agreement failed.');
         console.log('error:', error); // Print the error if one occurred
         return next(error);
@@ -49,7 +48,7 @@ function getAgreement(){
 
   // Call the TOON API for posting the agreement
 
-  var postAgreementId = function(agreementIdJSON) {
+  var postAgreementId = function (agreementIdJSON) {
     var options = {
       url: 'https://api.toonapi.com/toon/api/v1/agreements',
       method: 'POST',
@@ -62,7 +61,7 @@ function getAgreement(){
 
     request(options, function (error, response, body) {
 
-      if(error) {
+      if (error) {
         console.log('Posting Agreement failed.');
         console.log('error:', error); // Print the error if one occurred
         return next(error);
@@ -82,11 +81,11 @@ function getAgreement(){
   });
 }
 
-app.get('/devices', function(req, res) {
+app.get('/devices', function (req, res) {
 
   var req = req;
 
-  var getAllDevices = function() {
+  var getAllDevices = function () {
     var options = {
       url: 'https://api.toonapi.com/toon/api/v1/devices',
       headers: {
@@ -96,8 +95,8 @@ app.get('/devices', function(req, res) {
       }
     }
 
-    request(options, function(error, response, body) {
-      if(error) {
+    request(options, function (error, response, body) {
+      if (error) {
         console.log('Posting Agreement failed.');
         console.log('error:', error); // Print the error if one occurred
         return error;
@@ -114,13 +113,13 @@ app.get('/devices', function(req, res) {
 
 });
 
-app.get('/setLightOn', function(req, res) {
+app.get('/setLightOn', function (req, res) {
 
   // get the agreement here!
 
   var req = req;
 
-  var postLight = function() {
+  var postLight = function () {
     var options = {
       url: 'https://api.toonapi.com/toon/api/v1/devices/7ef160f9-3cea-4c0a-83dd-879790f9f99f',
       method: 'PUT',
@@ -128,24 +127,22 @@ app.get('/setLightOn', function(req, res) {
         'Authorization': 'Bearer 1e703bc6-2e6c-3775-9f43-d5f5bd8a242f',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(
-        {
-            "uuid": "7ef160f9-3cea-4c0a-83dd-879790f9f99f",
-            "zwuuid": "368198df-d3c2-4e09-9b32-8f96f611fbe3",
-            "deviceType": "hue_light-LCT001",
-            "name": "Hue Lamp 3",
-            "position": 2,
-            "inSwitchAll": true,
-            "inSwitchSchedule": false,
-            "usageCapable": false,
-            "currentState": 1,
-            "rgbColor": "BE8537"
-        }
-      )
+      body: JSON.stringify({
+        "uuid": "7ef160f9-3cea-4c0a-83dd-879790f9f99f",
+        "zwuuid": "368198df-d3c2-4e09-9b32-8f96f611fbe3",
+        "deviceType": "hue_light-LCT001",
+        "name": "Hue Lamp 3",
+        "position": 2,
+        "inSwitchAll": true,
+        "inSwitchSchedule": false,
+        "usageCapable": false,
+        "currentState": 1,
+        "rgbColor": "BE8537"
+      })
     }
 
-    request(options, function(error, response, body) {
-      if(error) {
+    request(options, function (error, response, body) {
+      if (error) {
         console.log('Posting Agreement failed.');
         console.log('error:', error); // Print the error if one occurred
         return error;
@@ -159,13 +156,13 @@ app.get('/setLightOn', function(req, res) {
   postLight();
 });
 
-app.get('/setLightOff', function(req, res) {
+app.get('/setLightOff', function (req, res) {
 
   // get the agreement here!
 
   var req = req;
 
-  var postLight = function() {
+  var postLight = function () {
     var options = {
       url: 'https://api.toonapi.com/toon/api/v1/devices/7ef160f9-3cea-4c0a-83dd-879790f9f99f',
       method: 'PUT',
@@ -173,24 +170,22 @@ app.get('/setLightOff', function(req, res) {
         'Authorization': 'Bearer 1e703bc6-2e6c-3775-9f43-d5f5bd8a242f',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(
-        {
-            "uuid": "7ef160f9-3cea-4c0a-83dd-879790f9f99f",
-            "zwuuid": "368198df-d3c2-4e09-9b32-8f96f611fbe3",
-            "deviceType": "hue_light-LCT001",
-            "name": "Hue Lamp 3",
-            "position": 2,
-            "inSwitchAll": true,
-            "inSwitchSchedule": false,
-            "usageCapable": false,
-            "currentState": 0,
-            "rgbColor": "BE8537"
-        }
-      )
+      body: JSON.stringify({
+        "uuid": "7ef160f9-3cea-4c0a-83dd-879790f9f99f",
+        "zwuuid": "368198df-d3c2-4e09-9b32-8f96f611fbe3",
+        "deviceType": "hue_light-LCT001",
+        "name": "Hue Lamp 3",
+        "position": 2,
+        "inSwitchAll": true,
+        "inSwitchSchedule": false,
+        "usageCapable": false,
+        "currentState": 0,
+        "rgbColor": "BE8537"
+      })
     }
 
-    request(options, function(error, response, body) {
-      if(error) {
+    request(options, function (error, response, body) {
+      if (error) {
         console.log('Posting Agreement failed.');
         console.log('error:', error); // Print the error if one occurred
         return error;
@@ -202,6 +197,48 @@ app.get('/setLightOff', function(req, res) {
   };
 
   postLight();
+});
+
+
+app.get('/status', function (req, res) {
+
+  var req = req;
+
+  var getTemp = function () {
+    var options = {
+      url: 'https://api.toonapi.com/toon/api/v1/status',
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer 1e703bc6-2e6c-3775-9f43-d5f5bd8a242f',
+        'Content-Type': 'application/json'
+      }
+    }
+
+    request(options, function (error, response, body) {
+      if (error) throw error;
+      else {
+        const findThermostatInfo = (object, searchKey, indent = '') => {
+          return Object.keys(object).map((key) => {
+            const actualObject = object[key];
+            console.log(indent, key);
+            if (key === searchKey) {
+              return actualObject;
+            }
+            if (typeof actualObject === 'object' && !Array.isArray(actualObject)) {
+              return findThermostatInfo(actualObject, key, indent + '    ');
+            }
+          }).filter(element => element !== undefined)[0];
+        }
+
+        var keyToFind = 'thermostatInfo';
+        var info = findThermostatInfo(JSON.parse(body), keyToFind);
+        console.log(info);
+      }
+    });
+  }
+
+  getTemp();
+
 });
 
 // This is what we want to have in the end
